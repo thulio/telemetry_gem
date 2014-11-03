@@ -96,7 +96,7 @@ module Telemetry
 
 		def self.aggregate(bucket, value)
 			raise Telemetry::AuthenticationFailed, "Please set your Telemetry.token" unless Telemetry.token
-			return Telemetry::Api.send(:post, "/aggregations/#{bucket}", {:value => value})
+			return Telemetry::Api.send(:patch, "/buckets/#{bucket}", {:value => value, :type => :aggregation})
 		end
 
 		def self.aggregate_set_interval(bucket, interval, values)
